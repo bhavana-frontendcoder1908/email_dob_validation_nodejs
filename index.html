@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validation Forms</title>
+   <style>
+    body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+}
+
+.container {
+    text-align: center;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+input {
+    padding: 10px;
+    margin: 10px 0;
+    width: 80%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+#emailResult, #dobResult {
+    margin-top: 20px;
+    font-size: 1.2em;
+}
+
+   </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Email Validation</h1>
+        <form id="emailForm">
+            <input type="email" id="email" placeholder="Enter your email" required>
+            <button type="submit">Validate</button>
+        </form>
+        <p id="emailResult"></p>
+    </div>
+
+    <div class="container">
+        <h1>Date of Birth Validation</h1>
+        <form id="dobForm">
+            <input type="date" id="dob" required>
+            <button type="submit">Validate</button>
+        </form>
+        <p id="dobResult"></p>
+    </div>
+
+    <script>
+    
+    document.getElementById('emailForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const email = document.getElementById('email').value;
+        const result = document.getElementById('emailResult');
+    
+        if (email.endsWith('@gmail.com')) {
+            result.textContent = 'Valid email';
+            result.style.color = 'green';
+        } else {
+            result.textContent = 'Not a valid email';
+            result.style.color = 'red';
+        }
+    });
+    
+    document.getElementById('dobForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const dob = new Date(document.getElementById('dob').value);
+        const today = new Date();
+        const result = document.getElementById('dobResult');
+    
+        // Set the time to 00:00:00 to compare only the date part
+        today.setHours(0, 0, 0, 0);
+    
+        if (dob > today) {
+            result.textContent = 'Invalid date';
+            result.style.color = 'red';
+        } else {
+            result.textContent = 'Valid date';
+            result.style.color = 'green';
+        }
+    });
+    </script>
+</body>
+</html>
